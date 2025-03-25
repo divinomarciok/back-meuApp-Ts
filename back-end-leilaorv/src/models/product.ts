@@ -19,6 +19,9 @@ export class Product {
     @JoinColumn({ name: 'category_id' })
     category!: string;
 
+    @Column ({type: 'varchar', length: 2500, nullable: true})
+    img_url?: string;
+
     @Column({ type: 'varchar', length: 20, nullable: true })
     unidade_measure?: string;
 

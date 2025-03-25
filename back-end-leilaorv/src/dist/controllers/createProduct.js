@@ -14,7 +14,7 @@ const db_datasource_1 = require("../config/db.datasource");
 const product_1 = require("../models/product");
 const user_1 = require("../models/user");
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, category, weigth, description } = req.body;
+    const { name, category, img_url, unidade_measure, weigth, description } = req.body;
     try {
         const productRepository = db_datasource_1.AppDataSource.getRepository(product_1.Product);
         const userRepository = db_datasource_1.AppDataSource.getRepository(user_1.User);
@@ -34,10 +34,16 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             res.status(400).json({ message: 'Produto já cadastrado' });
             return;
         }
+        if (!req.file) {
+            res.status(400).json({ message: 'Imagem não enviada' });
+            return;
+        }
         // Cria o novo produto
         const newProduct = productRepository.create({
             name,
             category,
+            img_url,
+            unidade_measure,
             weigth,
             description,
             user,

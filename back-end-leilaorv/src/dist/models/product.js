@@ -34,6 +34,10 @@ __decorate([
     __metadata("design:type", String)
 ], Product.prototype, "category", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 2500, nullable: true }),
+    __metadata("design:type", String)
+], Product.prototype, "img_url", void 0);
+__decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 20, nullable: true }),
     __metadata("design:type", String)
 ], Product.prototype, "unidade_measure", void 0);

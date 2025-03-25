@@ -12,13 +12,16 @@ import { getAllProducts } from '../controllers/getAllProducts';
 import { getAllEnterprises } from '../controllers/getAllEnterprises';
 import {getProductById} from '../controllers/getProductById'
 import { getEnterpriseProductsByProductId } from '../controllers/getEnterpriseProductsByProductId';
+import { uploadImageProduct,storage,upload } from '../controllers/uploadImageProduct';
+
 
 const router = Router();
 
 router.post('/createuser',validateUser, createUser);
 router.post('/login', authenticateUser);
 router.post('/createenterprise', authenticateToken, createEnterprise);
-router.post('/createproduct', authenticateToken,validateProduct,createProduct);
+router.post('/createproduct',authenticateToken,validateProduct,createProduct);
+router.post('/uploadImg',upload.single('file'),authenticateToken,uploadImageProduct);
 router.post('/addenterpriseproduct', authenticateToken, validateEnterpriseProduct, addEnterpriseProduct);
 
 
