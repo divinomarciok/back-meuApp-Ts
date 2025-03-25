@@ -10,7 +10,8 @@
     "test": "jest",
     "typeorm:run": "node ./node_modules/typeorm/cli.js migration:run -d ./src/dist/config/db.datasource.js",
     "typeorm:generate": "ts-node --require tsconfig-paths/register node_modules/typeorm/cli.js migration:generate --dataSource ./src/config/db.datasource.ts",
-    "typeorm:create": "ts-node --require tsconfig-paths/register node_modules/typeorm/cli.js migration:create"
+    "typeorm:create": "ts-node --require tsconfig-paths/register node_modules/typeorm/cli.js migration:create",
+    "preencher-banco": "ts-node src/seedBD/preenchebanco.ts"
   },
   "keywords": [],
   "author": "",

@@ -10,14 +10,15 @@ export class Product {
 
     @Column({ type: 'varchar', length: 100 })
     name!: string;
+    @Column({ type: 'varchar', length: 100 })
     mark!: string; 
+    
+    @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE' })
+    @JoinColumn({ name: 'category_id' })
+    category?: Category;
    
     @Column({ type: 'varchar', length: 100, nullable: true })
     description?: string;     
-
-    @ManyToOne(() => Category, (category) => category.id, { onDelete: 'CASCADE' })
-    @JoinColumn({ name: 'category_id' })
-    category!: string;
 
     @Column ({type: 'varchar', length: 2500, nullable: true})
     img_url?: string;

@@ -25,14 +25,18 @@ __decorate([
     __metadata("design:type", String)
 ], Product.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 100, nullable: true }),
+    (0, typeorm_1.Column)({ type: 'varchar', length: 100 }),
     __metadata("design:type", String)
-], Product.prototype, "description", void 0);
+], Product.prototype, "mark", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => category_1.Category, (category) => category.id, { onDelete: 'CASCADE' }),
     (0, typeorm_1.JoinColumn)({ name: 'category_id' }),
-    __metadata("design:type", String)
+    __metadata("design:type", category_1.Category)
 ], Product.prototype, "category", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 100, nullable: true }),
+    __metadata("design:type", String)
+], Product.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 2500, nullable: true }),
     __metadata("design:type", String)
