@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import multer from 'multer';
 import { AppDataSource } from '../config/db.datasource';
 import { Product } from '../models/product';
 import { User } from '../models/user';
@@ -8,8 +9,9 @@ interface CustomRequest extends Request {
   user?: string | jwt.JwtPayload;
 }
 
+  
 export const createProduct = async (req: CustomRequest, res: Response): Promise<void> => {
-    const { name, category, weigth, description } = req.body;
+    const { name, category, img_url, unidade_measure ,weigth, description } = req.body;
 
     try {
         const productRepository = AppDataSource.getRepository(Product);
@@ -34,10 +36,17 @@ export const createProduct = async (req: CustomRequest, res: Response): Promise<
             res.status(400).json({ message: 'Produto já cadastrado' });
             return;
         }
+
+        if(!req.file){
+            res.status(400).json({message: 'Imagem não enviada'});
+            return
+        }
         // Cria o novo produto
         const newProduct = productRepository.create({
             name,
             category,
+            img_url,
+            unidade_measure,
             weigth,
             description,
             user,
