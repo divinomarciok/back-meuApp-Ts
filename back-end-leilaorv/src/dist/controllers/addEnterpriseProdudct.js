@@ -16,7 +16,7 @@ const enterprise_1 = require("../models/enterprise");
 const product_1 = require("../models/product");
 const user_1 = require("../models/user");
 const addEnterpriseProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { enterprise_id, product_id, price } = req.body;
+    const { isSale, enterprise_id, product_id, price, date_start } = req.body;
     if (typeof req.user !== 'object' || req.user === null || !('id' in req.user)) {
         res.status(401).json({ message: 'Usuário não autenticado' });
         return;
@@ -26,7 +26,7 @@ const addEnterpriseProduct = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const enterpriseRepository = db_datasource_1.AppDataSource.getRepository(enterprise_1.Enterprise);
         const productRepository = db_datasource_1.AppDataSource.getRepository(product_1.Product);
         const userRepository = db_datasource_1.AppDataSource.getRepository(user_1.User);
-        const enterpriseProductRepository = db_datasource_1.AppDataSource.getRepository(price_list_1.PriceList);
+        const priceListReposity = db_datasource_1.AppDataSource.getRepository(price_list_1.PriceList);
         const enterprise = yield enterpriseRepository.findOne({ where: { id: enterprise_id } });
         if (!enterprise) {
             res.status(404).json({ message: 'Empresa não encontrada' });
@@ -42,21 +42,22 @@ const addEnterpriseProduct = (req, res) => __awaiter(void 0, void 0, void 0, fun
             res.status(404).json({ message: 'Usuário não encontrado' });
             return;
         }
-        const newEnterpriseProduct = enterpriseProductRepository.create({
+        const newPriceList = priceListReposity.create({
+            isSale: undefined,
             enterprise,
             product,
             price,
             user,
         });
-        yield enterpriseProductRepository.save(newEnterpriseProduct);
+        yield priceListReposity.save(newPriceList);
         res.status(201).json({
             message: 'Produto adicionado à empresa com sucesso!',
             enterpriseProduct: {
-                id: newEnterpriseProduct.id,
+                id: newPriceList.id,
                 enterprise_id: enterprise.id,
                 product_id: product.id,
                 user_id: user.id,
-                price: newEnterpriseProduct.price,
+                price: newPriceList.price,
             },
         });
     }

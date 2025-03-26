@@ -11,7 +11,7 @@ interface CustomRequest extends Request {
   }
 
 export const addEnterpriseProduct = async (req: CustomRequest, res: Response): Promise<void> => {
-    const { enterprise_id, product_id, price } = req.body;
+    const { isSale, enterprise_id, product_id, price,date_start } = req.body;
 
     if (typeof req.user !== 'object' || req.user === null || !('id' in req.user)) {
         res.status(401).json({ message: 'Usuário não autenticado' });
@@ -26,7 +26,7 @@ export const addEnterpriseProduct = async (req: CustomRequest, res: Response): P
         const enterpriseRepository = AppDataSource.getRepository(Enterprise);
         const productRepository = AppDataSource.getRepository(Product);
         const userRepository = AppDataSource.getRepository(User);
-        const enterpriseProductRepository = AppDataSource.getRepository(PriceList);
+        const priceListReposity = AppDataSource.getRepository(PriceList);
 
         const enterprise = await enterpriseRepository.findOne({ where: { id: enterprise_id } });
         if (!enterprise) {
@@ -46,23 +46,26 @@ export const addEnterpriseProduct = async (req: CustomRequest, res: Response): P
             return;
         }
 
-        const newEnterpriseProduct = enterpriseProductRepository.create({
+        
+
+        const newPriceList = priceListReposity.create({
+            isSale:undefined,
             enterprise,
             product,          
             price,
             user,
         });
 
-        await enterpriseProductRepository.save(newEnterpriseProduct);
+        await priceListReposity.save(newPriceList);
 
         res.status(201).json({
             message: 'Produto adicionado à empresa com sucesso!',
             enterpriseProduct: {
-                id: newEnterpriseProduct.id,
+                id: newPriceList.id,
                 enterprise_id: enterprise.id,
                 product_id: product.id,
                 user_id: user.id,
-                price: newEnterpriseProduct.price,
+                price: newPriceList.price,
             },
         });
     } catch (err) {

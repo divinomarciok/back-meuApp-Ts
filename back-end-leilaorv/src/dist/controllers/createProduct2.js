@@ -17,6 +17,7 @@ const multer_1 = __importDefault(require("multer"));
 const db_datasource_1 = require("../config/db.datasource");
 const product_1 = require("../models/product");
 const user_1 = require("../models/user");
+const promises_1 = __importDefault(require("fs/promises"));
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -29,6 +30,20 @@ const upload = (0, multer_1.default)({ storage: storage });
 const createproduct2 = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     const { name, category, img_url, unidade_measure, weigth, description } = req.body;
+    function cleanArq_error() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            if ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) {
+                try {
+                    yield promises_1.default.unlink(req.file.path);
+                    console.log(`Arquivo excluido =>> ${req.file.path}`);
+                }
+                catch (unlinkError) {
+                    console.log('Erro ao remover =>> ', unlinkError);
+                }
+            }
+        });
+    }
     try {
         const productRepository = db_datasource_1.AppDataSource.getRepository(product_1.Product);
         const userRepository = db_datasource_1.AppDataSource.getRepository(user_1.User);
@@ -46,6 +61,7 @@ const createproduct2 = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const existingProduct = yield productRepository.findOne({ where: { name } });
         if (existingProduct) {
             res.status(400).json({ message: 'Produto já cadastrado' });
+            yield cleanArq_error();
             return;
         }
         const productData = productRepository.create({
@@ -67,6 +83,7 @@ const createproduct2 = (req, res) => __awaiter(void 0, void 0, void 0, function*
     catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Erro ao criar produto' });
+        cleanArq_error();
     }
 });
 exports.createproduct2 = createproduct2;

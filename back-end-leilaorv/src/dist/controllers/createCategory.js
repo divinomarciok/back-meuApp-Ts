@@ -15,14 +15,17 @@ const category_1 = require("../models/category");
 const categoryRepository = db_datasource_1.AppDataSource.getRepository(category_1.Category);
 const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, description } = req.body;
-    const category = categoryRepository.create({
-        name,
-        description
-    });
-    /* const category = new Category();
-     category.name = name;
-     category.description = description;*/
-    yield categoryRepository.save(category);
-    res.status(201).json({ message: "Categoria criada", category });
+    try {
+        const category = categoryRepository.create({
+            name,
+            description
+        });
+        yield categoryRepository.save(category);
+        res.status(201).json({ message: "Categoria criada", category });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro ao criar categoria" });
+    }
 });
 exports.createCategory = createCategory;

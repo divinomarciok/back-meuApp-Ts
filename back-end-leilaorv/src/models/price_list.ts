@@ -17,7 +17,7 @@ export class PriceList {
     enterprise!: Enterprise;
 
     @Column({type: 'boolean'})
-    isSale!: boolean;
+    isSale?: boolean;
 
     @Column({ type: 'numeric', precision: 10, scale: 2 })
     price!: number;

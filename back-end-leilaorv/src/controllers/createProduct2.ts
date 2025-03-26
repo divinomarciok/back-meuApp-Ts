@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../config/db.datasource';
 import { Product } from '../models/product';
 import { User } from '../models/user';
+import fs from 'fs/promises';
 
 
 const storage = multer.diskStorage({
@@ -24,6 +25,19 @@ interface CustomRequest extends Request {
     
 export const createproduct2 = async (req: CustomRequest, res: Response): Promise<void> => {
       const { name, category, img_url, unidade_measure ,weigth, description } = req.body;
+
+      async function cleanArq_error(){
+        if(req.file?.path){ 
+            try{
+                await fs.unlink(req.file.path);
+                console.log(`Arquivo excluido =>> ${req.file.path}`)
+            }catch(unlinkError){
+                console.log('Erro ao remover =>> ', unlinkError)
+            }
+          }
+
+     }
+      
   
       try {
           const productRepository = AppDataSource.getRepository(Product);
@@ -32,6 +46,7 @@ export const createproduct2 = async (req: CustomRequest, res: Response): Promise
   
           if (typeof req.user !== 'object' || req.user === null || !('id' in req.user)) {
               res.status(401).json({ message: 'Usuário não autenticado' });
+              await cleanArq_error();
               return;
           }
           const userId = req.user.id;
@@ -40,12 +55,14 @@ export const createproduct2 = async (req: CustomRequest, res: Response): Promise
           const user = await userRepository.findOne({ where: { id: userId } });
           if (!user) {
               res.status(404).json({ message: 'Usuário não encontrado' });
+              await cleanArq_error();
               return;
           }
       
           const existingProduct = await productRepository.findOne({ where: { name } });
           if (existingProduct) {
               res.status(400).json({ message: 'Produto já cadastrado' });
+              await cleanArq_error();
               return;
           }
        
@@ -74,7 +91,13 @@ export const createproduct2 = async (req: CustomRequest, res: Response): Promise
       } catch (err) {
           console.error(err);
           res.status(500).json({ message: 'Erro ao criar produto' });
+
+         
+          await cleanArq_error();
       }
   };
+
+
+
 
 

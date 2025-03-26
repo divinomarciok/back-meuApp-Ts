@@ -29,7 +29,11 @@ async function insertCategories() {
       ('Higiene e Limpeza', 'Produtos para limpeza doméstica e higiene pessoal'),
       ('Hortifruti', 'Produtos orgânicos e agroecológicos'),
       ('Utilidades Domésticas', 'Utensílios para cozinha, lavanderia e organização da casa')
-    `);
+      
+    
+      `);
+
+    
     
     await queryRunner.commitTransaction();
     console.log('Categorias inseridas com sucesso!');
