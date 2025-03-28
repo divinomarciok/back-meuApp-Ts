@@ -1,24 +1,39 @@
 import { Request, Response, NextFunction } from 'express';
+import { Product } from '../models/product';
 
 export const validateProduct = (req: Request, res: Response, next: NextFunction): void => {
-    const { name, category, weigth, unidade_measure } = req.body;
+    
+    const productData = {
 
-    if (!name || typeof name !== 'string' || name.length === 0) {
+          name: req.body.name,
+          mark: req.body.mark,
+          category: req.body.category,
+          weigth: req.body.weigth,
+          unidade_measure: req.body?.unidade_measure,
+          description: req.body?.description,
+          img_url: req.file?.path,
+          user: req.body.user         
+    
+ 
+         // product.user = userId;
+    }
+    console.log(productData.name);
+    if (!productData.name || typeof productData.name !== 'string' || productData.name.length === 0) {
         res.status(400).json({ message: 'Nome do produto é obrigatório e deve ser uma string válida' });
         return;
     }
 
-    if (category && typeof category !== 'string') {
+    if (productData.category && typeof productData.category !== 'string') {
         res.status(400).json({ message: 'Categoria do produto deve ser uma string' });
         return;
     }
 
-    if (weigth && typeof weigth !== 'string') {
+    if (productData.weigth && typeof productData.weigth !== 'string') {
         res.status(400).json({ message: 'Tamanho do produto deve ser uma string' });
         return;
     }
 
-    console.log(unidade_measure);
+    console.log(productData.unidade_measure);
     /*if (unidade_measure && (typeof unidade_measure !== 'number' || unidade_measure < 0)) {
         res.status(400).json({ message: 'Quantidade do produto deve ser um número maior ou igual a zero' });
         return;

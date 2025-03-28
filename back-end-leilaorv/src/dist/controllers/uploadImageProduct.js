@@ -24,13 +24,14 @@ exports.storage = multer_1.default.diskStorage({
 });
 exports.upload = (0, multer_1.default)({ storage: exports.storage });
 const uploadImageProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const file = req.file;
     try {
         if (!file) {
             res.status(400).json({ message: 'Nenhuma imagem selecionada' });
         }
         if (file) {
-            res.status(200).json({ message: 'Imagem enviada com sucesso', imagePath: file.path });
+            yield res.status(200).json({ message: 'Imagem enviada com sucesso', imagePath: (_a = req.file) === null || _a === void 0 ? void 0 : _a.path });
         }
     }
     catch (error) {

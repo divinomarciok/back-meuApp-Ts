@@ -12,16 +12,19 @@ import { getAllProducts } from '../controllers/getAllProducts';
 import { getAllEnterprises } from '../controllers/getAllEnterprises';
 import {getProductById} from '../controllers/getProductById'
 import { getEnterpriseProductsByProductId } from '../controllers/getEnterpriseProductsByProductId';
-import { uploadImageProduct,storage,upload } from '../controllers/uploadImageProduct';
-
-
+import { uploadImageProduct,upload } from '../controllers/uploadImageProduct';
+import { createproduct2 } from '../controllers/createProduct2';
+import { createCategory } from '../controllers/createCategory';
+import { validCategory } from '../middleware/validCategory';
 const router = Router();
 
 router.post('/createuser',validateUser, createUser);
 router.post('/login', authenticateUser);
+router.post('/createcategory',authenticateToken,validCategory,createCategory);
 router.post('/createenterprise', authenticateToken, createEnterprise);
-router.post('/createproduct',authenticateToken,validateProduct,createProduct);
-router.post('/uploadImg',upload.single('file'),authenticateToken,uploadImageProduct);
+//router.post('/createproduct',authenticateToken,validateProduct,createProduct);
+router.post('/createproduct2',authenticateToken,upload.single('file'),validateProduct,createproduct2);
+router.post('/uploadImg', upload.single('file'),authenticateToken,uploadImageProduct);
 router.post('/addenterpriseproduct', authenticateToken, validateEnterpriseProduct, addEnterpriseProduct);
 
 

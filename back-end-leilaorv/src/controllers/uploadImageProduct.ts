@@ -27,8 +27,12 @@ export const uploadImageProduct  = async (req: CustomRequest, res: Response): Pr
             res.status(400).json({message: 'Nenhuma imagem selecionada'});  
         }
 
-        if(file){
-            res.status(200).json({message: 'Imagem enviada com sucesso', imagePath: file.path});
+       
+
+       if(file){
+            await res.status(200).json({message: 'Imagem enviada com sucesso', imagePath: req.file?.path});
+
+            
         }
 
     } catch (error) {
