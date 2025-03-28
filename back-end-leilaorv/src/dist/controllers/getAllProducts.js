@@ -20,7 +20,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
             id: product.id,
             nome: product.name,
             tamanho: product.weigth,
-            marca: 'Marca Genérica', // Placeholder, pois a marca não está no modelo
+            marca: product.mark, // Placeholder, pois a marca não está no modelo
             categoria: product.category,
         }));
         res.status(201).json(formattedProducts);

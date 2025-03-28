@@ -4,16 +4,15 @@ import {createUser} from '../controllers/createUser';
 import {authenticateUser} from '../controllers/authenticateUser';
 import {authenticateToken} from '../middleware/authenticateToken'
 import {createEnterprise} from '../controllers/createEnterprise';
-import { createProduct } from '../controllers/createProduct';
 import { validateProduct } from '../middleware/validateProduct';
 import {validateEnterpriseProduct} from '../middleware/validateEnterpriseProduct'
-import {addEnterpriseProduct} from '../controllers/addEnterpriseProdudct'
+import {addPriceList} from '../controllers/addPriceList'
 import { getAllProducts } from '../controllers/getAllProducts';
 import { getAllEnterprises } from '../controllers/getAllEnterprises';
 import {getProductById} from '../controllers/getProductById'
-import { getEnterpriseProductsByProductId } from '../controllers/getEnterpriseProductsByProductId';
+import { getProductPriceList } from '../controllers/getProductPriceList';
 import { uploadImageProduct,upload } from '../controllers/uploadImageProduct';
-import { createproduct2 } from '../controllers/createProduct2';
+import { createproduct } from '../controllers/createProduct';
 import { createCategory } from '../controllers/createCategory';
 import { validCategory } from '../middleware/validCategory';
 const router = Router();
@@ -23,15 +22,16 @@ router.post('/login', authenticateUser);
 router.post('/createcategory',authenticateToken,validCategory,createCategory);
 router.post('/createenterprise', authenticateToken, createEnterprise);
 //router.post('/createproduct',authenticateToken,validateProduct,createProduct);
-router.post('/createproduct2',authenticateToken,upload.single('file'),validateProduct,createproduct2);
+router.post('/createproduct',authenticateToken,upload.single('file'),validateProduct,createproduct);
 router.post('/uploadImg', upload.single('file'),authenticateToken,uploadImageProduct);
-router.post('/addenterpriseproduct', authenticateToken, validateEnterpriseProduct, addEnterpriseProduct);
+router.post('/addPriceList', authenticateToken, validateEnterpriseProduct, addPriceList); 
 
 
 router.get('/getAllProducts', authenticateToken, getAllProducts);
 router.get('/getEnterprises', authenticateToken, getAllEnterprises);
 router.get('/products/:productId', authenticateToken, getProductById)
-router.get('/products/:productId/enterprises',authenticateToken, getEnterpriseProductsByProductId);
+
+router.get('/priceList/:productId',authenticateToken, getProductPriceList);
 
 router.get("/debug", (req, res) => {
     res.status(200).json({ message: "Debug funcionando!" });

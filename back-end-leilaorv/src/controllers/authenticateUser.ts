@@ -32,7 +32,6 @@ export const authenticateUser = async (req: Request, res: Response): Promise<voi
 
         res.status(200).json({ message: 'Autenticado com sucesso', token });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Erro interno no servidor' });
+        console.log(error);
     }
-};
+}

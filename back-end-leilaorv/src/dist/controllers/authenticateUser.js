@@ -37,8 +37,7 @@ const authenticateUser = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(200).json({ message: 'Autenticado com sucesso', token });
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Erro interno no servidor' });
+        console.log(error);
     }
 });
 exports.authenticateUser = authenticateUser;

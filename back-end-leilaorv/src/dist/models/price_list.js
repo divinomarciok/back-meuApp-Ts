@@ -32,7 +32,7 @@ __decorate([
     __metadata("design:type", enterprise_1.Enterprise)
 ], PriceList.prototype, "enterprise", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'boolean' }),
+    (0, typeorm_1.Column)({ type: 'boolean', nullable: true, default: false }),
     __metadata("design:type", Boolean)
 ], PriceList.prototype, "isSale", void 0);
 __decorate([
