@@ -49,6 +49,7 @@ const createproduct2 = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const userRepository = db_datasource_1.AppDataSource.getRepository(user_1.User);
         if (typeof req.user !== 'object' || req.user === null || !('id' in req.user)) {
             res.status(401).json({ message: 'Usuário não autenticado' });
+            yield cleanArq_error();
             return;
         }
         const userId = req.user.id;
@@ -56,6 +57,7 @@ const createproduct2 = (req, res) => __awaiter(void 0, void 0, void 0, function*
         const user = yield userRepository.findOne({ where: { id: userId } });
         if (!user) {
             res.status(404).json({ message: 'Usuário não encontrado' });
+            yield cleanArq_error();
             return;
         }
         const existingProduct = yield productRepository.findOne({ where: { name } });
@@ -83,7 +85,7 @@ const createproduct2 = (req, res) => __awaiter(void 0, void 0, void 0, function*
     catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Erro ao criar produto' });
-        cleanArq_error();
+        yield cleanArq_error();
     }
 });
 exports.createproduct2 = createproduct2;

@@ -11,7 +11,7 @@ const getAllProducts = async (req: Request, res: Response): Promise<void> => {
             id:product.id,
             nome: product.name,
             tamanho: product.weigth,
-            marca: 'Marca Genérica', // Placeholder, pois a marca não está no modelo
+            marca: product.mark, // Placeholder, pois a marca não está no modelo
             categoria: product.category,
         }));
 

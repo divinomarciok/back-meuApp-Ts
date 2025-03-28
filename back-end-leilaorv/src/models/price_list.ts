@@ -16,7 +16,7 @@ export class PriceList {
     @JoinColumn({ name: 'enterprise_id' }) 
     enterprise!: Enterprise;
 
-    @Column({type: 'boolean'})
+    @Column({type: 'boolean', nullable: true, default: false})
     isSale?: boolean;
 
     @Column({ type: 'numeric', precision: 10, scale: 2 })

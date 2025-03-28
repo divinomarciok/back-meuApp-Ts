@@ -10,7 +10,8 @@ interface CustomRequest extends Request {
     user?: string | jwt.JwtPayload;
   }
 
-export const addEnterpriseProduct = async (req: CustomRequest, res: Response): Promise<void> => {
+export const addPriceList = async (req: CustomRequest, res: Response): Promise<void> => {
+    
     const { isSale, enterprise_id, product_id, price,date_start } = req.body;
 
     if (typeof req.user !== 'object' || req.user === null || !('id' in req.user)) {
@@ -49,10 +50,11 @@ export const addEnterpriseProduct = async (req: CustomRequest, res: Response): P
         
 
         const newPriceList = priceListReposity.create({
-            isSale:undefined,
+            isSale:isSale,
             enterprise,
             product,          
             price,
+            date_start,
             user,
         });
 
