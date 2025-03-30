@@ -3,6 +3,7 @@ import express from "express";
 import router from "./routes/routes";
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
+import path from "path";
 
 //dotenv.config();
 
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", router);
+app.use("/images", express.static(path.join(__dirname,"images")));
 
 app.get("/", (req, res) => {
   res.send("API funcionando!");

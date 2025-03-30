@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const routes_1 = __importDefault(require("./routes/routes"));
 const db_datasource_1 = require("./config/db.datasource");
 const cors_1 = __importDefault(require("cors"));
+const path_1 = __importDefault(require("path"));
 //dotenv.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/", routes_1.default);
+app.use("/images", express_1.default.static(path_1.default.join(__dirname, "images")));
 app.get("/", (req, res) => {
     res.send("API funcionando!");
 });

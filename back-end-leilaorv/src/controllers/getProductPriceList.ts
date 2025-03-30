@@ -25,16 +25,13 @@ const getProductPriceList = async (req: Request, res: Response): Promise<void> =
         }
 
         // Formatando o resultado para retornar somente as informações necessárias
-        const formatedPriceList = productInlist.map(ep => ({
-            //nome: ep.product?.nomeProd,
-          //  tamanho: ep.product?.tamanhoProd,
-            //marca: 'Marca Genérica', // Placeholder, caso precise de uma informação que não existe no modelo
+        const formatedPriceList = productInlist.map(ep => ({           
             nameProd: ep.product.name,
             mark:ep.product.mark,
             price: ep.price,     
             isSale: ep.isSale,
             enterprise: ep.enterprise?.name,
-            un:ep.product.unidade_measure,
+            un:ep.product.unidade_measure,  
             weigth:ep.product.weigth,
             img_url:ep.product.img_url        
            
