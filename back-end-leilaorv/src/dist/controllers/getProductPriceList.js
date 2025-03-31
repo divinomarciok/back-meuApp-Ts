@@ -33,9 +33,6 @@ const getProductPriceList = (req, res) => __awaiter(void 0, void 0, void 0, func
         const formatedPriceList = productInlist.map(ep => {
             var _a;
             return ({
-                //nome: ep.product?.nomeProd,
-                //  tamanho: ep.product?.tamanhoProd,
-                //marca: 'Marca Genérica', // Placeholder, caso precise de uma informação que não existe no modelo
                 nameProd: ep.product.name,
                 mark: ep.product.mark,
                 price: ep.price,
