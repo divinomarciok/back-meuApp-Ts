@@ -10,6 +10,7 @@ export class Product {
 
     @Column({ type: 'varchar', length: 100 })
     name!: string;
+
     @Column({ type: 'varchar', length: 100 })
     mark!: string; 
     

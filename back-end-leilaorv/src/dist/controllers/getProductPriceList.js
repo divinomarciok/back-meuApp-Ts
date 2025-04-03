@@ -16,7 +16,6 @@ const getProductPriceList = (req, res) => __awaiter(void 0, void 0, void 0, func
     const { productId } = req.params;
     try {
         const priceListReposity = db_datasource_1.AppDataSource.getRepository(price_list_1.PriceList);
-        // Como 'product' é um relacionamento, precisamos passar um objeto para o campo 'where'
         const productInlist = yield priceListReposity.find({
             where: {
                 product: {

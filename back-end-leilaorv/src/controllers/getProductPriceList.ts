@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { AppDataSource } from '../config/db.datasource';
 import { PriceList } from '../models/price_list';
 import { Request, Response } from 'express';
@@ -9,7 +8,6 @@ const getProductPriceList = async (req: Request, res: Response): Promise<void> =
     try {
         const priceListReposity = AppDataSource.getRepository(PriceList);
         
-        // Como 'product' é um relacionamento, precisamos passar um objeto para o campo 'where'
         const productInlist = await priceListReposity.find({
             where: {
                 product: {

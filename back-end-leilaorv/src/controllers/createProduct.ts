@@ -24,7 +24,7 @@ interface CustomRequest extends Request {
   
     
 export const createproduct = async (req: CustomRequest, res: Response): Promise<void> => {
-      const { name, category, img_url, unidade_measure ,weigth, description } = req.body;
+      const { name } = req.body;
 
       async function cleanArq_error(){
         if(req.file?.path){ 
@@ -51,7 +51,7 @@ export const createproduct = async (req: CustomRequest, res: Response): Promise<
           }
           const userId = req.user.id;
   
-          // Verifica se o usuário existe
+
           const user = await userRepository.findOne({ where: { id: userId } });
           if (!user) {
               res.status(404).json({ message: 'Usuário não encontrado' });
