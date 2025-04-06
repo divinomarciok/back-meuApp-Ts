@@ -8,20 +8,17 @@ import jwt from 'jsonwebtoken';
 
 interface CustomRequest extends Request {
     user?: string | jwt.JwtPayload;
-  }
+}
 
 export const addPriceList = async (req: CustomRequest, res: Response): Promise<void> => {
-    
-    const { isSale, enterprise_id, product_id, price,date_start } = req.body;
+
+    const { isSale, enterprise_id, product_id, price, date_start } = req.body;
 
     if (typeof req.user !== 'object' || req.user === null || !('id' in req.user)) {
         res.status(401).json({ message: 'Usuário não autenticado' });
-         return;
+        return;
     }
-
     const userId = req.user.id;
-
-
     try {
 
         const enterpriseRepository = AppDataSource.getRepository(Enterprise);
@@ -47,12 +44,10 @@ export const addPriceList = async (req: CustomRequest, res: Response): Promise<v
             return;
         }
 
-        
-
         const newPriceList = priceListReposity.create({
-            isSale:isSale,
+            isSale: isSale,
             enterprise,
-            product,          
+            product,
             price,
             date_start,
             user,

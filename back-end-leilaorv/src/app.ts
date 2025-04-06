@@ -1,11 +1,8 @@
 import express from "express";
-//import dotenv from "dotenv";
 import router from "./routes/routes";
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
 import path from "path";
-
-//dotenv.config();
 
 const app = express();
 
@@ -18,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", router);
-app.use("/images", express.static(path.join(__dirname,"images")));
+app.use("/uploads", express.static(path.join(__dirname,"uploads")));
 
 app.get("/", (req, res) => {
   res.send("API funcionando!");

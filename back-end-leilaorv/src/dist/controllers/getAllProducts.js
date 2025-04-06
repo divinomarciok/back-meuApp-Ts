@@ -15,13 +15,14 @@ const product_1 = require("../models/product");
 const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const productRepository = db_datasource_1.AppDataSource.getRepository(product_1.Product);
-        const products = yield productRepository.find();
+        const products = yield productRepository.find({ relations: ['category'] });
         const formattedProducts = products.map(product => ({
-            id: product.id,
+            id: product.id.toString(),
             nome: product.name,
             tamanho: product.weigth,
             marca: product.mark, // Placeholder, pois a marca não está no modelo
-            categoria: product.category,
+            categoria: product.category ? product.category.id : null,
+            img_url: product.img_url
         }));
         res.status(201).json(formattedProducts);
     }

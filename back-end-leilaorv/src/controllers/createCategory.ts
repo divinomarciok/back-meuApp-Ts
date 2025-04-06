@@ -5,21 +5,21 @@ import { Category } from '../models/category';
 const categoryRepository = AppDataSource.getRepository(Category);
 
 export const createCategory = async (req: Request, res: Response) => {
-    const { name,description } = req.body;
+    const { name, description } = req.body;
 
-    try{
-    const category = categoryRepository.create({
-        name,
-        description
-    });
-   
-    await categoryRepository.save(category);
+    try {
+        const category = categoryRepository.create({
+            name,
+            description
+        });
 
-    res.status(201).json({message:"Categoria criada",category});
-}  catch(error){
-    console.error(error);
-    res.status(500).json({message: "Erro ao criar categoria"});
-}
+        await categoryRepository.save(category);
+
+        res.status(201).json({ message: "Categoria criada", category });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro ao criar categoria" });
+    }
 
 };
 

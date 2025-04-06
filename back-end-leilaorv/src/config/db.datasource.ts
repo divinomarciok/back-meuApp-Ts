@@ -18,8 +18,9 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || 'user',  
   password: process.env.DB_PASSWORD || 'password',  
   database: process.env.DB_DATABASE || 'leilao',  
-  synchronize: true, 
-  logging: ["query", "error"],
+  synchronize: true,
+  //logging: ["query", "error"],
+  logging:["error"],
   entities: [User,Product,Enterprise,PriceList,Category], // Caminho absoluto para entidades compiladas
   migrations: [path.join(__dirname, "../migrations/*.js"),
     path.join(__dirname, "../migrations/*.ts")

@@ -16,7 +16,6 @@ const getProductPriceList = (req, res) => __awaiter(void 0, void 0, void 0, func
     const { productId } = req.params;
     try {
         const priceListReposity = db_datasource_1.AppDataSource.getRepository(price_list_1.PriceList);
-        // Como 'product' é um relacionamento, precisamos passar um objeto para o campo 'where'
         const productInlist = yield priceListReposity.find({
             where: {
                 product: {
@@ -26,7 +25,7 @@ const getProductPriceList = (req, res) => __awaiter(void 0, void 0, void 0, func
             relations: ['enterprise', 'product'],
         });
         if (!productInlist || productInlist.length === 0) {
-            res.status(404).json({ message: 'Nenhuma associação encontrada para o produto' });
+            res.status(204).json({ message: 'Nenhuma associação encontrada para o produto' });
             return;
         }
         // Formatando o resultado para retornar somente as informações necessárias

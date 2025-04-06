@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from "../config/db.datasource";
-import { User } from '../models/user'; 
+import { User } from '../models/user';
 import bcrypt from 'bcryptjs';
 
 const createUser = async (req: Request, res: Response): Promise<void> => {
     let { nome, email, login, senha } = req.body;
 
     try {
-    
-        const userRepository = AppDataSource.getRepository(User);      
-        const existingUser = await userRepository.findOne({ where: { email } }); 
-      
+
+        const userRepository = AppDataSource.getRepository(User);
+        const existingUser = await userRepository.findOne({ where: { email } });
+
         console.log(existingUser);
 
         if (existingUser) {
@@ -18,7 +18,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
-        const senhaHash = await bcrypt.hash(senha,10);
+        const senhaHash = await bcrypt.hash(senha, 10);
 
         senha = senhaHash;
 
@@ -28,7 +28,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
             login,
             senha,
         });
-       
+
         await userRepository.save(newUser);
 
         res.status(201).json({

@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use("/", routes_1.default);
-app.use("/images", express_1.default.static(path_1.default.join(__dirname, "images")));
+app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "uploads")));
 app.get("/", (req, res) => {
     res.send("API funcionando!");
 });

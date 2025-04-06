@@ -21,7 +21,8 @@ exports.AppDataSource = new typeorm_1.DataSource({
     password: process.env.DB_PASSWORD || 'password',
     database: process.env.DB_DATABASE || 'leilao',
     synchronize: true,
-    logging: ["query", "error"],
+    //logging: ["query", "error"],
+    logging: ["error"],
     entities: [user_1.User, product_1.Product, enterprise_1.Enterprise, price_list_1.PriceList, category_1.Category], // Caminho absoluto para entidades compiladas
     migrations: [path_1.default.join(__dirname, "../migrations/*.js"),
         path_1.default.join(__dirname, "../migrations/*.ts")

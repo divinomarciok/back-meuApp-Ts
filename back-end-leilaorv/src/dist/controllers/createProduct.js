@@ -29,7 +29,7 @@ const storage = multer_1.default.diskStorage({
 const upload = (0, multer_1.default)({ storage: storage });
 const createproduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
-    const { name, category, img_url, unidade_measure, weigth, description } = req.body;
+    const { name } = req.body;
     function cleanArq_error() {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
@@ -53,7 +53,6 @@ const createproduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             return;
         }
         const userId = req.user.id;
-        // Verifica se o usuário existe
         const user = yield userRepository.findOne({ where: { id: userId } });
         if (!user) {
             res.status(404).json({ message: 'Usuário não encontrado' });
