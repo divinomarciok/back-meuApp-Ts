@@ -11,7 +11,6 @@ export const authenticateUser = async (req: Request, res: Response): Promise<voi
 
     try {
         const userRepository = AppDataSource.getRepository(User);
-
         const user = await userRepository.findOne({ where: { login } });
 
         console.log(user);
@@ -22,12 +21,12 @@ export const authenticateUser = async (req: Request, res: Response): Promise<voi
         }
 
         const isPasswordValid = await bcrypt.compare(senha, user.senha);
-        
+
         if (!isPasswordValid) {
             res.status(401).json({ message: 'Valid senha inválidos' });
             return;
         }
-    
+
         const token = jwt.sign({ id: user.id, login: user.login }, JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({ message: 'Autenticado com sucesso', token });

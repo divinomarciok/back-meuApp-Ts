@@ -5,7 +5,7 @@ import { User } from '../models/user';
 import jwt from 'jsonwebtoken';
 
 interface CustomRequest extends Request {
-  user?: string | jwt.JwtPayload;
+    user?: string | jwt.JwtPayload;
 }
 
 export const createEnterprise = async (req: CustomRequest, res: Response): Promise<void> => {

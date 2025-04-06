@@ -7,7 +7,7 @@ const getProductPriceList = async (req: Request, res: Response): Promise<void> =
 
     try {
         const priceListReposity = AppDataSource.getRepository(PriceList);
-        
+
         const productInlist = await priceListReposity.find({
             where: {
                 product: {
@@ -18,21 +18,21 @@ const getProductPriceList = async (req: Request, res: Response): Promise<void> =
         });
 
         if (!productInlist || productInlist.length === 0) {
-            res.status(404).json({ message: 'Nenhuma associação encontrada para o produto' });
+            res.status(204).json({ message: 'Nenhuma associação encontrada para o produto' });
             return;
         }
 
         // Formatando o resultado para retornar somente as informações necessárias
-        const formatedPriceList = productInlist.map(ep => ({           
+        const formatedPriceList = productInlist.map(ep => ({
             nameProd: ep.product.name,
-            mark:ep.product.mark,
-            price: ep.price,     
+            mark: ep.product.mark,
+            price: ep.price,
             isSale: ep.isSale,
             enterprise: ep.enterprise?.name,
-            un:ep.product.unidade_measure,  
-            weigth:ep.product.weigth,
-            img_url:ep.product.img_url        
-           
+            un: ep.product.unidade_measure,
+            weigth: ep.product.weigth,
+            img_url: ep.product.img_url
+
         }));
 
         res.status(200).json(formatedPriceList);
@@ -42,5 +42,4 @@ const getProductPriceList = async (req: Request, res: Response): Promise<void> =
     }
 };
 
-// Exportando o método para ser usado nas rotas
 export { getProductPriceList };
