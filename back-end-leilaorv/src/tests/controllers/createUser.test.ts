@@ -12,6 +12,7 @@ app.use("/", router);
 
 jest.mock('../../config/db.datasource', () => ({
   AppDataSource: {
+
     getRepository: jest.fn().mockImplementation((entity) => {
       if (entity === User) {
 
@@ -50,7 +51,9 @@ describe('POST /createuser', () => {
       };
   
       // Mockando o comportamento do repositório para `findOne` (nenhum usuário encontrado)
-      (AppDataSource.getRepository(User).findOne as jest.Mock).mockResolvedValue(null);     
+
+     // (AppDataSource.getRepository(User).findOne as jest.Mock).mockResolvedValue(null);    
+      
       (AppDataSource.getRepository(User).create as jest.Mock).mockReturnValue(mockUser);
       (AppDataSource.getRepository(User).save as jest.Mock).mockResolvedValue(mockUser);
   

@@ -22,15 +22,16 @@ router.post('/login', authenticateUser);
 router.post('/createcategory',authenticateToken,validCategory,createCategory);
 router.post('/createenterprise', authenticateToken, createEnterprise);
 //router.post('/createproduct',authenticateToken,validateProduct,createProduct);
-router.post('/createproduct',authenticateToken,upload.single('file'),validateProduct,createproduct);
 router.post('/uploadImg', upload.single('file'),authenticateToken,uploadImageProduct);
 router.post('/addPriceList', authenticateToken, validateEnterpriseProduct, addPriceList); 
 
 
-router.get('/getAllProducts', authenticateToken, getAllProducts);
-router.get('/getEnterprises', authenticateToken, getAllEnterprises);
-router.get('/products/:productId', authenticateToken, getProductById)
 
+router.get('/getEnterprises', authenticateToken, getAllEnterprises);
+
+router.post('/createproduct',authenticateToken,upload.single('file'),validateProduct,createproduct);
+router.get('/products/:productId', authenticateToken, getProductById)
+router.get('/getAllProducts', authenticateToken, getAllProducts);
 router.get('/priceList/:productId',authenticateToken, getProductPriceList);
 
 router.get("/debug", (req, res) => {

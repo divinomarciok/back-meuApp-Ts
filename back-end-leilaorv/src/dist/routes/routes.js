@@ -23,12 +23,12 @@ router.post('/login', authenticateUser_1.authenticateUser);
 router.post('/createcategory', authenticateToken_1.authenticateToken, validCategory_1.validCategory, createCategory_1.createCategory);
 router.post('/createenterprise', authenticateToken_1.authenticateToken, createEnterprise_1.createEnterprise);
 //router.post('/createproduct',authenticateToken,validateProduct,createProduct);
-router.post('/createproduct', authenticateToken_1.authenticateToken, uploadImageProduct_1.upload.single('file'), validateProduct_1.validateProduct, createProduct_1.createproduct);
 router.post('/uploadImg', uploadImageProduct_1.upload.single('file'), authenticateToken_1.authenticateToken, uploadImageProduct_1.uploadImageProduct);
 router.post('/addPriceList', authenticateToken_1.authenticateToken, validateEnterpriseProduct_1.validateEnterpriseProduct, addPriceList_1.addPriceList);
-router.get('/getAllProducts', authenticateToken_1.authenticateToken, getAllProducts_1.getAllProducts);
 router.get('/getEnterprises', authenticateToken_1.authenticateToken, getAllEnterprises_1.getAllEnterprises);
+router.post('/createproduct', authenticateToken_1.authenticateToken, uploadImageProduct_1.upload.single('file'), validateProduct_1.validateProduct, createProduct_1.createproduct);
 router.get('/products/:productId', authenticateToken_1.authenticateToken, getProductById_1.getProductById);
+router.get('/getAllProducts', authenticateToken_1.authenticateToken, getAllProducts_1.getAllProducts);
 router.get('/priceList/:productId', authenticateToken_1.authenticateToken, getProductPriceList_1.getProductPriceList);
 router.get("/debug", (req, res) => {
     res.status(200).json({ message: "Debug funcionando!" });

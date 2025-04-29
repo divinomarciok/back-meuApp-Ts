@@ -5,7 +5,7 @@
   "main": "./src/dist/server.js",
   "scripts": {
     "build": "tsc && npm run typeorm:run",
-    "buildrun":"tsc && node ./src/dist/server.js",
+    "buildrun":"tsc && ts-node --require tsconfig-paths/register src/server.ts",
     "dev": "ts-node --require tsconfig-paths/register src/server.ts",
     "start": "node ./src/dist/server.js",
     "test": "jest",

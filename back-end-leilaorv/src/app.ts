@@ -1,5 +1,6 @@
 import express from "express";
 import router from "./routes/routes";
+import routesProduct from './routes/productRoutes';
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
 import path from "path";
@@ -13,6 +14,8 @@ app.use((req, res, next) => {
   console.log(`[LOG] ${req.method} ${req.url}`);
   next();
 });
+
+app.use("/api",routesProduct);
 
 app.use("/", router);
 app.use("/uploads", express.static(path.join(__dirname,"uploads")));
