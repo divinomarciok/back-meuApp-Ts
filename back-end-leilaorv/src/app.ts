@@ -1,6 +1,8 @@
 import express from "express";
+import { userRoutes } from './routes/user.routes';
+
 import router from "./routes/routes";
-import routesProduct from './routes/productRoutes';
+
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
 import path from "path";
@@ -9,12 +11,13 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
 app.use((req, res, next) => {
   console.log(`[LOG] ${req.method} ${req.url}`);
   next();
 });
 
+
+/*
 app.use("/api",routesProduct);
 
 app.use("/", router);
@@ -23,6 +26,15 @@ app.use("/uploads", express.static(path.join(__dirname,"uploads")));
 app.get("/", (req, res) => {
   res.send("API funcionando!");
 });
+*/
+
+// src/app.ts ou index.ts
+
+
+app.use(express.json());
+app.use('/api', userRoutes);
+
+export { app };
 
 AppDataSource.initialize()
   .then(() => {

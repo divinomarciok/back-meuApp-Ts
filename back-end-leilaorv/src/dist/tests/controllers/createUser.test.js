@@ -55,7 +55,7 @@ describe('POST /createuser', () => {
             senha: '123456',
         };
         // Mockando o comportamento do repositório para `findOne` (nenhum usuário encontrado)
-        db_datasource_1.AppDataSource.getRepository(user_1.User).findOne.mockResolvedValue(null);
+        // (AppDataSource.getRepository(User).findOne as jest.Mock).mockResolvedValue(null);    
         db_datasource_1.AppDataSource.getRepository(user_1.User).create.mockReturnValue(mockUser);
         db_datasource_1.AppDataSource.getRepository(user_1.User).save.mockResolvedValue(mockUser);
         const response = yield (0, supertest_1.default)(app).post('/createuser').send(mockUser);
