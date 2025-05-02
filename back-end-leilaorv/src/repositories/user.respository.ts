@@ -12,16 +12,6 @@ export class UserRepository extends BaseRepository<User> {
         return this.repository.findOne({ 
             where: { email : email } 
         });
-    }
+    } 
 
-  
-    /*async findById(id: number): Promise<User | null> {
-        return this.findByid(id);
-    }
-    async updateUser(id: number, userData: Partial<User>): Promise<User | null> {
-        return this.update(id, userData);
-    }
-    async deleteUser(id: number): Promise<boolean> {
-        return this.delete(id.toString());
-    }*/
 }
