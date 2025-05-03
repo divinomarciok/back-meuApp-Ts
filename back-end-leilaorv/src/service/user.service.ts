@@ -35,6 +35,10 @@ export class UserService {
         return this.userRepository.findByEmail(email);
     }
 
+    async findUserByLogin(login: string): Promise<User | null> {
+        return this.userRepository.findByLogin(login);
+    }
+
     async deleteUser(id: number): Promise<boolean> {
         const user = await this.userRepository.findByid(id);
         if (!user) {

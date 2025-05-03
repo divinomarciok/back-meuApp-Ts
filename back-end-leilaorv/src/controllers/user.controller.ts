@@ -3,13 +3,13 @@ import { UserService } from '../service/user.service'; // Importe o UserService
 import bcrypt from 'bcryptjs';
 
 export class UserController {
+
     private userService: UserService;
 
     constructor() {
         this.userService = new UserService();
     }
 
-    // CREATE - Criar usuário
     async create(req: Request, res: Response): Promise<void> {
         try {
             const { nome, email, senha, ...outrosDados } = req.body;
@@ -24,7 +24,6 @@ export class UserController {
         }
     }
 
-    // READ - Buscar um usuário por ID
     async findById(req: Request, res: Response): Promise<void> {
         try {
             const id = Number(req.params.id);
@@ -43,7 +42,6 @@ export class UserController {
         }
     }
 
-    // READ - Buscar um usuário por E-mail (via POST)
     async findByEmail(req: Request, res: Response): Promise<void> {
         try {
             const { email } = req.body;
@@ -64,6 +62,30 @@ export class UserController {
             res.json(userSemSenha);
         } catch (error) {
             console.error('Erro ao buscar usuário por email:', error);
+            res.status(500).json({ message: 'Erro ao buscar usuário' });
+        }
+    }
+
+    async findByLogin(req: Request, res: Response): Promise<void> {
+        try {
+            const { login } = req.body;
+
+            if (!login) {
+                res.status(400).json({ message: 'O campo login é obrigatório no corpo da requisição.' });
+                return;
+            }
+
+            const user = await this.userService.findUserByLogin(login);
+
+            if (!user) {
+                res.status(404).json({ message: 'Usuário não encontrado' });
+                return;
+            }
+
+            //const { senha: _, ...userSemSenha } = user;
+            res.json(user);
+        } catch (error) {
+            console.error('Erro ao buscar usuário por login:', error);
             res.status(500).json({ message: 'Erro ao buscar usuário' });
         }
     }

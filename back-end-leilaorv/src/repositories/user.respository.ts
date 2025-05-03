@@ -14,4 +14,10 @@ export class UserRepository extends BaseRepository<User> {
         });
     } 
 
+    async findByLogin(login: string): Promise<User | null> {
+        return this.repository.findOne({ 
+            where: { login : login } 
+        });
+    } 
+
 }

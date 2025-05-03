@@ -6,6 +6,7 @@ import router from "./routes/routes";
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
 import path from "path";
+import { authRoutes } from "./routes/login.route";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use('/api', userRoutes);
+app.use('/api',authRoutes);
 
 export { app };
 
