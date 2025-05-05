@@ -1,5 +1,4 @@
 import {Router} from 'express';
-import {validateUser} from '../middleware/validateUser';
 import {createUser} from '../controllers/createUser';
 import {authenticateUser} from '../controllers/authenticateUser';
 import {authenticateToken} from '../middleware/authenticateToken'
@@ -17,7 +16,7 @@ import { createCategory } from '../controllers/createCategory';
 import { validCategory } from '../middleware/validCategory';
 const router = Router();
 
-router.post('/createuser',validateUser, createUser);
+//router.post('/createuser',validateUser, createUser);
 router.post('/login', authenticateUser);
 router.post('/createcategory',authenticateToken,validCategory,createCategory);
 router.post('/createenterprise', authenticateToken, createEnterprise);

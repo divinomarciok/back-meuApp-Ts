@@ -21,6 +21,7 @@ export class AuthController {
     try {
              
         const user =  await this.userService.findUserByLogin(login);
+
         if (!user) {
             res.status(401).json({ message: 'Usuário ou senha inválidos' });
             return;
@@ -30,15 +31,16 @@ export class AuthController {
 
         if (!isPasswordValid) {
             res.status(401).json({ message: 'Valid senha inválidos' });
-            return;        }
-
+            return;        
+        }
+        
         const token = jwt.sign({ id: user.id, login: user.login }, JWT_SECRET, { expiresIn: '1h' });
 
         res.status(200).json({ message: 'Autenticado com sucesso', token });
             
     }catch(error){
        
-        res.status(500).json({message:"Erro interno do servidor : ", error});
+        res.status(500).json({message:"Erro interno do servidor teste: ", error});
     }
     }
    

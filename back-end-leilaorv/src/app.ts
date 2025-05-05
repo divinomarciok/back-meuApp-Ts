@@ -1,11 +1,10 @@
 import express from "express";
 import { userRoutes } from './routes/user.routes';
-
-import router from "./routes/routes";
+import { productRoutes } from "./routes/product.routes";
 
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
-import path from "path";
+
 import { authRoutes } from "./routes/login.route";
 
 const app = express();
@@ -34,7 +33,9 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use('/api', userRoutes);
-app.use('/api',authRoutes);
+app.use('/api', authRoutes);
+app.use('/api', productRoutes);
+
 
 export { app };
 

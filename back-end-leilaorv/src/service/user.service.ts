@@ -9,16 +9,17 @@ export class UserService {
     }
 
     async createUser(userData: User): Promise<User> {   
-    
+          
         const existingUser = await this.userRepository.findByEmail(userData.email);
         if (existingUser) {
-            throw new Error('Email já cadastrado');
+        throw new Error('Email já cadastrado');
         }
 
-             if (!userData.email) {
-            throw new Error('Email é obrigatório');
+        const existingUserByLogin = await this.userRepository.findByLogin(userData.login);
+         if (existingUserByLogin) {
+        throw new Error('Login indisponível');
         }
-    
+            
         return this.userRepository.create(userData);
     }
 
