@@ -28,15 +28,12 @@ export class CategoryController {
         }
     }
 
-    /**
-     * Atualiza uma categoria existente
-     */
+ 
     async update(req: Request, res: Response): Promise<void> {
         try {
             const id = Number(req.params.id);
             const categoryData = req.body;
             
-            // Validar se há dados para atualizar
             if (Object.keys(categoryData).length === 0) {
                 res.status(400).json({ message: 'Nenhum dado fornecido para atualização' });
                 return;
@@ -56,9 +53,7 @@ export class CategoryController {
         }
     }
 
-    /**
-     * Remove uma categoria
-     */
+
     async delete(req: Request, res: Response): Promise<void> {
         try {
             const id = Number(req.params.id);
@@ -76,9 +71,7 @@ export class CategoryController {
         }
     }
 
-    /**
-     * Busca uma categoria pelo ID
-     */
+    
     async findById(req: Request, res: Response): Promise<void> {
         try {
             const id = Number(req.params.id);
@@ -96,9 +89,7 @@ export class CategoryController {
         }
     }
 
-    /**
-     * Lista todas as categorias
-     */
+
     async list(req: Request, res: Response): Promise<void> {
         try {
             const categories = await this.categoryService.listCategories();
@@ -109,9 +100,7 @@ export class CategoryController {
         }
     }
 
-    /**
-     * Busca categorias por nome
-     */
+
     async findByName(req: Request, res: Response): Promise<void> {
         try {
             const { name } = req.query;
@@ -135,9 +124,7 @@ export class CategoryController {
         }
     }
 
-    /**
-     * Busca categorias por texto no nome ou descrição
-     */
+ 
     async search(req: Request, res: Response): Promise<void> {
         try {
             const { query } = req.query;

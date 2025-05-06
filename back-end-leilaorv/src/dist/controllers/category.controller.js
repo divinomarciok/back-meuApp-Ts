@@ -32,15 +32,11 @@ class CategoryController {
             }
         });
     }
-    /**
-     * Atualiza uma categoria existente
-     */
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id = Number(req.params.id);
                 const categoryData = req.body;
-                // Validar se há dados para atualizar
                 if (Object.keys(categoryData).length === 0) {
                     res.status(400).json({ message: 'Nenhum dado fornecido para atualização' });
                     return;
@@ -58,9 +54,6 @@ class CategoryController {
             }
         });
     }
-    /**
-     * Remove uma categoria
-     */
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -78,9 +71,6 @@ class CategoryController {
             }
         });
     }
-    /**
-     * Busca uma categoria pelo ID
-     */
     findById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -98,9 +88,6 @@ class CategoryController {
             }
         });
     }
-    /**
-     * Lista todas as categorias
-     */
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -113,9 +100,6 @@ class CategoryController {
             }
         });
     }
-    /**
-     * Busca categorias por nome
-     */
     findByName(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -137,9 +121,6 @@ class CategoryController {
             }
         });
     }
-    /**
-     * Busca categorias por texto no nome ou descrição
-     */
     search(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

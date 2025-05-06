@@ -33,7 +33,9 @@ class UserController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const _a = req.body, { nome, email, senha } = _a, outrosDados = __rest(_a, ["nome", "email", "senha"]);
+                let _a = req.body, { nome, email, senha } = _a, outrosDados = __rest(_a, ["nome", "email", "senha"]);
+                const senhaHash = yield bcryptjs_1.default.hash(senha, 10);
+                senha = senhaHash;
                 const user = yield this.userService.createUser(Object.assign({ nome, email, senha }, outrosDados));
                 const { senha: _ } = user, userSemSenha = __rest(user, ["senha"]);
                 res.status(201).json(userSemSenha);

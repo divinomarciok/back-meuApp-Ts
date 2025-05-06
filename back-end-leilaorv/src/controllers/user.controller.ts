@@ -12,7 +12,11 @@ export class UserController {
 
     async create(req: Request, res: Response): Promise<void> {
         try {
-            const { nome, email, senha, ...outrosDados } = req.body;
+            let { nome, email, senha, ...outrosDados } = req.body;
+
+            const senhaHash = await bcrypt.hash(senha, 10);
+
+            senha = senhaHash
 
             const user = await this.userService.createUser({ nome, email, senha, ...outrosDados } as any); 
 

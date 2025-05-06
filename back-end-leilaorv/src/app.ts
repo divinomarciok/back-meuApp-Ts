@@ -1,11 +1,12 @@
 import express from "express";
+import { AppDataSource } from "./config/db.datasource";
+import cors from "cors";
 import { authRoutes } from "./routes/login.route";
 import { userRoutes } from './routes/user.routes';
 import { productRoutes } from "./routes/product.routes";
 import { categoryRoutes } from "./routes/category.routes";
+import { enterpriseRoutes } from "./routes/enterprise.routes";
 
-import { AppDataSource } from "./config/db.datasource";
-import cors from "cors";
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/api', userRoutes);
 app.use('/api', authRoutes);
 app.use('/api', productRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', enterpriseRoutes)
 
 
 export { app };
