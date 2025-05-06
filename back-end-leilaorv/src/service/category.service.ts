@@ -16,6 +16,7 @@ export class CategoryService {
     async createCategory(categoryData: Partial<Category>): Promise<Category> {
         
         const exists = await this.categoryRepository.existsByName(categoryData.name!);
+
         if (exists) {
             throw new Error('Já existe uma categoria com este nome');
         }
@@ -49,6 +50,7 @@ export class CategoryService {
     async deleteCategory(id: number): Promise<boolean> {
        
         const category = await this.categoryRepository.findByid(id);
+        
         if (!category) {
             throw new Error('Categoria não encontrada');
         }

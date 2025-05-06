@@ -15,14 +15,10 @@ class CategoryController {
     constructor() {
         this.categoryService = new category_service_1.CategoryService();
     }
-    /**
-     * Cria uma nova categoria
-     */
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const categoryData = req.body;
-                // Validar dados obrigatórios
                 if (!categoryData.name || !categoryData.description) {
                     res.status(400).json({ message: 'Os campos name e description são obrigatórios' });
                     return;
@@ -123,12 +119,12 @@ class CategoryController {
     findByName(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { name } = req.body;
+                const { name } = req.query;
                 if (!name) {
                     res.status(400).json({ message: 'O campo name é obrigatório no corpo da requisição' });
                     return;
                 }
-                const categories = yield this.categoryService.findCategoriesByName(name);
+                const categories = yield this.categoryService.findCategoriesByName(name.toString());
                 if (categories.length === 0) {
                     res.status(404).json({ message: 'Nenhuma categoria encontrada com este nome' });
                     return;

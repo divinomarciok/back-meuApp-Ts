@@ -1,11 +1,12 @@
 import express from "express";
+import { authRoutes } from "./routes/login.route";
 import { userRoutes } from './routes/user.routes';
 import { productRoutes } from "./routes/product.routes";
+import { categoryRoutes } from "./routes/category.routes";
 
 import { AppDataSource } from "./config/db.datasource";
 import cors from "cors";
 
-import { authRoutes } from "./routes/login.route";
 
 const app = express();
 
@@ -32,9 +33,11 @@ app.get("/", (req, res) => {
 
 
 app.use(express.json());
+
 app.use('/api', userRoutes);
 app.use('/api', authRoutes);
 app.use('/api', productRoutes);
+app.use('/api', categoryRoutes);
 
 
 export { app };

@@ -8,14 +8,12 @@ export class CategoryController {
         this.categoryService = new CategoryService();
     }
 
-    /**
-     * Cria uma nova categoria
-     */
+  
     async create(req: Request, res: Response): Promise<void> {
         try {
-            const categoryData = req.body;
-            
-            // Validar dados obrigatórios
+
+            const categoryData = req.body;            
+           
             if (!categoryData.name || !categoryData.description) {
                 res.status(400).json({ message: 'Os campos name e description são obrigatórios' });
                 return;
@@ -116,14 +114,14 @@ export class CategoryController {
      */
     async findByName(req: Request, res: Response): Promise<void> {
         try {
-            const { name } = req.body;
+            const { name } = req.query;
             
             if (!name) {
                 res.status(400).json({ message: 'O campo name é obrigatório no corpo da requisição' });
                 return;
             }
             
-            const categories = await this.categoryService.findCategoriesByName(name);
+            const categories = await this.categoryService.findCategoriesByName(name.toString());
             
             if (categories.length === 0) {
                 res.status(404).json({ message: 'Nenhuma categoria encontrada com este nome' });

@@ -5,11 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 const express_1 = __importDefault(require("express"));
+const login_route_1 = require("./routes/login.route");
 const user_routes_1 = require("./routes/user.routes");
 const product_routes_1 = require("./routes/product.routes");
+const category_routes_1 = require("./routes/category.routes");
 const db_datasource_1 = require("./config/db.datasource");
 const cors_1 = __importDefault(require("cors"));
-const login_route_1 = require("./routes/login.route");
 const app = (0, express_1.default)();
 exports.app = app;
 app.use((0, cors_1.default)());
@@ -33,6 +34,7 @@ app.use(express_1.default.json());
 app.use('/api', user_routes_1.userRoutes);
 app.use('/api', login_route_1.authRoutes);
 app.use('/api', product_routes_1.productRoutes);
+app.use('/api', category_routes_1.categoryRoutes);
 db_datasource_1.AppDataSource.initialize()
     .then(() => {
     console.log("Banco de dados conectado");
