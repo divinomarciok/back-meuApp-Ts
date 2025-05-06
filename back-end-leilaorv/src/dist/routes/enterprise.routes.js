@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.enterpriseRoutes = void 0;
+const express_1 = require("express");
+const enterprise_controller_1 = require("../controllers/enterprise.controller");
+const authenticateToken_1 = require("../middleware/authenticateToken");
+const router = (0, express_1.Router)();
+exports.enterpriseRoutes = router;
+const enterpriseController = new enterprise_controller_1.EnterpriseController();
+router.post('/enterprises', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.create(req, res));
+router.get('/enterprises/search', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.search(req, res));
+router.put('/enterprises/:id', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.update(req, res));
+router.delete('/enterprises/:id', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.delete(req, res));
+router.get('/enterprises', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.list(req, res));
+router.get('/enterprises/search/name', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.findByName(req, res));
+router.get('/enterprises/user/:userId', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.findByUser(req, res));
+router.get('/enterprises/:id', authenticateToken_1.authenticateToken, (req, res) => enterpriseController.findById(req, res));
