@@ -12,6 +12,7 @@ router.post('/products', authenticateToken_1.authenticateToken, upload_middlewar
 router.put('/products/:id', authenticateToken_1.authenticateToken, upload_middleware_1.uploadMiddleware.single('image'), (req, res) => productController.update(req, res));
 router.delete('/products/:id', authenticateToken_1.authenticateToken, (req, res) => productController.delete(req, res));
 router.get('/products', authenticateToken_1.authenticateToken, (req, res) => productController.list(req, res));
+router.get('/products/sales', authenticateToken_1.authenticateToken, (req, res) => productController.listSale(req, res));
 router.get('/products/name', authenticateToken_1.authenticateToken, (req, res) => productController.findByName(req, res));
 router.get('/products/mark', authenticateToken_1.authenticateToken, (req, res) => productController.findByMark(req, res));
 router.get('/products/category/:categoryId', authenticateToken_1.authenticateToken, (req, res) => productController.findByCategory(req, res));

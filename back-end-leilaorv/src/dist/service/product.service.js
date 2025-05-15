@@ -38,6 +38,7 @@ class ProductService {
             product.description = productData.description;
             product.unidade_measure = productData.unidade_measure;
             product.weigth = productData.weigth;
+            product.isSale = productData.isSale;
             product.user = user;
             if (filePath) {
                 product.img_url = filePath;
@@ -115,6 +116,11 @@ class ProductService {
     listProducts() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.productRepository.listWithRelations();
+        });
+    }
+    listProductsSale() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.productRepository.findBySale();
         });
     }
     findProductsByName(name) {

@@ -11,6 +11,7 @@ router.post('/products', authenticateToken, uploadMiddleware.single('image'), (r
 router.put('/products/:id', authenticateToken, uploadMiddleware.single('image'), (req, res) => productController.update(req, res));
 router.delete('/products/:id', authenticateToken, (req, res) => productController.delete(req, res));
 router.get('/products', authenticateToken, (req, res) => productController.list(req, res));
+router.get('/products/sales', authenticateToken, (req, res) => productController.listSale(req, res));
 router.get('/products/name', authenticateToken, (req, res) => productController.findByName(req, res));
 router.get('/products/mark', authenticateToken, (req, res) => productController.findByMark(req, res));
 router.get('/products/category/:categoryId', authenticateToken, (req, res) => productController.findByCategory(req, res));

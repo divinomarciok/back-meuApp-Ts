@@ -50,6 +50,10 @@ __decorate([
     __metadata("design:type", Number)
 ], Product.prototype, "weigth", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'boolean', default: false }),
+    __metadata("design:type", Boolean)
+], Product.prototype, "isSale", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => user_1.User, user => user.id, { onDelete: 'CASCADE' }),
     (0, typeorm_1.JoinColumn)({ name: 'user_id' }) // Altere o nome da coluna para "user_id"
     ,

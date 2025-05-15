@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.priceListRoutes = void 0;
+const express_1 = require("express");
+const pricelist_controller_1 = require("../controllers/pricelist.controller");
+const authenticateToken_1 = require("../middleware/authenticateToken");
+const router = (0, express_1.Router)();
+exports.priceListRoutes = router;
+const priceListController = new pricelist_controller_1.PriceListController();
+router.post('/pricelists', authenticateToken_1.authenticateToken, (req, res) => priceListController.create(req, res));
+router.put('/pricelists/:id', authenticateToken_1.authenticateToken, (req, res) => priceListController.update(req, res));
+router.delete('/pricelists/:id', authenticateToken_1.authenticateToken, (req, res) => priceListController.delete(req, res));
+router.get('/pricelists', authenticateToken_1.authenticateToken, (req, res) => priceListController.list(req, res));
+router.get('/pricelists/sales', authenticateToken_1.authenticateToken, (req, res) => priceListController.listSale(req, res));
+router.get('/pricelists/product/:productId', authenticateToken_1.authenticateToken, (req, res) => priceListController.findByProduct(req, res));
+router.get('/pricelistsenterprise/:enterpriseId', authenticateToken_1.authenticateToken, (req, res) => priceListController.findByEnterprise(req, res));
+router.get('/pricelists/:id', authenticateToken_1.authenticateToken, (req, res) => priceListController.findById(req, res));

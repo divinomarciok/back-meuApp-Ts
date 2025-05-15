@@ -10,7 +10,10 @@
     "start": "node ./src/dist/server.js",
     "test": "jest",
     "typeorm:run": "node ./node_modules/typeorm/cli.js migration:run -d ./src/dist/config/db.datasource.js",
-    "typeorm:generate": "ts-node --require tsconfig-paths/register node_modules/typeorm/cli.js migration:generate --dataSource ./src/config/db.datasource.ts",
+     "//-COMENT-//":"TESTE COMENTARIO",
+      "_comment_typeorm": "Para gerar migration passar caminho total: >> npm run typeorm:generate -- src/migrations/AddIsSaleToProduct -d ./src/config/db.datasource.ts",
+ 
+   "typeorm:generate": "ts-node --require tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate",
     "typeorm:create": "ts-node --require tsconfig-paths/register node_modules/typeorm/cli.js migration:create",
     "preencher-banco": "ts-node src/seedBD/preenchebanco-enterprise.ts",
     "preencher-banco2": "ts-node src/seedBD/preenchebanco-enterprise.ts && ts-node src/seedBD/preenchebanco-category.ts"

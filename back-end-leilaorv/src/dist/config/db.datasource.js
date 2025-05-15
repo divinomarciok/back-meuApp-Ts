@@ -8,7 +8,7 @@ const typeorm_1 = require("typeorm");
 const user_1 = require("../models/user");
 const enterprise_1 = require("../models/enterprise");
 const product_1 = require("../models/product");
-const price_list_1 = require("../models/price_list");
+const pricelist_1 = require("../models/pricelist");
 const category_1 = require("../models/category");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
@@ -23,7 +23,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     synchronize: true,
     //logging: ["query", "error"],
     logging: ["error"],
-    entities: [user_1.User, product_1.Product, enterprise_1.Enterprise, price_list_1.PriceList, category_1.Category], // Caminho absoluto para entidades compiladas
+    entities: [user_1.User, product_1.Product, enterprise_1.Enterprise, pricelist_1.PriceList, category_1.Category], // Caminho absoluto para entidades compiladas
     migrations: [path_1.default.join(__dirname, "../migrations/*.js"),
         path_1.default.join(__dirname, "../migrations/*.ts")
     ], // Caminho absoluto para migrations compiladas
