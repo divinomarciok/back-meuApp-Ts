@@ -30,6 +30,9 @@ export class Product {
     @Column({ type: 'numeric', precision: 10, scale: 2, nullable: true })
     weigth?: number;
 
+    @Column({ type: 'boolean', default: false })
+    isSale!: boolean;
+
     @ManyToOne(() => User, user => user.id, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })  // Altere o nome da coluna para "user_id"
     user!: User;

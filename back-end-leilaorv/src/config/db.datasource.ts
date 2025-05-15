@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { User } from '../models/user';
 import { Enterprise } from '../models/enterprise';
 import { Product } from '../models/product';
-import {PriceList} from '../models/price_list'
+import {PriceList} from '../models/pricelist'
 import {Category} from '../models/category'
 import dotenv from 'dotenv';
 import path from 'path';

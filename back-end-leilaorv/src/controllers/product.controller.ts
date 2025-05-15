@@ -18,13 +18,16 @@ export class ProductController {
             console.log('user ID : ',userId)
             const categoryId = req.body.categoryId ? Number(req.body.categoryId) : undefined;
             
-            let filePath: string | undefined;
-            if (req.file) {
-                filePath = `/uploads/products/${req.file.filename}`;            }
-
-            const product = await this.productService.createProduct(productData, userId, categoryId, filePath);
+            let fileName: string | undefined;
             
-            res.status(201).json(product);
+            fileName = req.file?.filename;
+            
+
+            const product = await this.productService.createProduct(productData, userId, categoryId, fileName);
+
+            const { user: _, ...productSemUser } = product;                        
+            res.status(201).json(productSemUser);
+
         } catch (error: any) {
             console.error('Erro ao criar produto:', error);
             res.status(400).json({ message: error.message || 'Erro ao criar produto' });
@@ -98,6 +101,16 @@ export class ProductController {
         } catch (error) {
             console.error('Erro ao listar produtos:', error);
             res.status(500).json({ message: 'Erro ao listar produtos' });
+        }
+    }
+
+    async listSale(req:Request, res:Response): Promise<void> {
+        try{
+            const saleProducts = await this.productService.listProductsSale();
+            res.json(saleProducts);
+        }catch(error){
+            console.error('Erro ao listar produtos SALE', error);
+            res.status(500).json({message: 'Erro ao listar produtos em promoção'});
         }
     }
 

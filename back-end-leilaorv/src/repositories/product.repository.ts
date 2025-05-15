@@ -45,6 +45,13 @@ export class ProductRepository extends BaseRepository<Product> {
         });
     }
 
+    async findBySale(): Promise<Product[] | null>{
+        return this.repository.find({
+            where:{isSale:true},
+            relations :['category']
+        });
+    }
+
        async listWithRelations(): Promise<Product[]> {
         return this.repository.find({
             relations: ['category']

@@ -8,6 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const product_service_1 = require("../service/product.service");
@@ -17,18 +28,18 @@ class ProductController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const productData = req.body;
                 //const userId = Number(req.body.userId); 
                 const userId = req.user.id;
                 console.log('user ID : ', userId);
                 const categoryId = req.body.categoryId ? Number(req.body.categoryId) : undefined;
-                let filePath;
-                if (req.file) {
-                    filePath = `/uploads/products/${req.file.filename}`;
-                }
-                const product = yield this.productService.createProduct(productData, userId, categoryId, filePath);
-                res.status(201).json(product);
+                let fileName;
+                fileName = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
+                const product = yield this.productService.createProduct(productData, userId, categoryId, fileName);
+                const { user: _ } = product, productSemUser = __rest(product, ["user"]);
+                res.status(201).json(productSemUser);
             }
             catch (error) {
                 console.error('Erro ao criar produto:', error);
@@ -102,6 +113,18 @@ class ProductController {
             catch (error) {
                 console.error('Erro ao listar produtos:', error);
                 res.status(500).json({ message: 'Erro ao listar produtos' });
+            }
+        });
+    }
+    listSale(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const saleProducts = yield this.productService.listProductsSale();
+                res.json(saleProducts);
+            }
+            catch (error) {
+                console.error('Erro ao listar produtos SALE', error);
+                res.status(500).json({ message: 'Erro ao listar produtos em promoção' });
             }
         });
     }

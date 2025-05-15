@@ -5,7 +5,7 @@ import path from 'path';
 const storage = multer.diskStorage({
     
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, './uploads');
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg','image/gif', 'image/webp'];
     
     if (allowedMimeTypes.includes(file.mimetype)) {
         cb(null, true);

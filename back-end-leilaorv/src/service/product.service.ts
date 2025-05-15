@@ -31,6 +31,7 @@ export class ProductService {
         product.description = productData.description;
         product.unidade_measure = productData.unidade_measure;
         product.weigth = productData.weigth;
+        product.isSale = productData.isSale!;
         product.user = user;
         if (filePath) {
         product.img_url = filePath;
@@ -116,6 +117,10 @@ export class ProductService {
 
     async listProducts(): Promise<Product[]> {
         return this.productRepository.listWithRelations();
+    }
+
+    async listProductsSale(): Promise<Product[] | null>{
+        return this.productRepository.findBySale();
     }
 
     async findProductsByName(name: string): Promise<Product[]> {

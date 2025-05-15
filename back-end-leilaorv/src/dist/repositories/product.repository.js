@@ -58,6 +58,14 @@ class ProductRepository extends base_repository_1.BaseRepository {
             });
         });
     }
+    findBySale() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.repository.find({
+                where: { isSale: true },
+                relations: ['category']
+            });
+        });
+    }
     listWithRelations() {
         return __awaiter(this, void 0, void 0, function* () {
             return this.repository.find({
