@@ -110,7 +110,7 @@ export class PriceListController {
             const priceLists = await this.priceListService.findPriceListsByProduct(productId);
             
             if (priceLists.length === 0) {
-                res.status(404).json({ message: 'Nenhuma lista de preço encontrada para este produto' });
+                res.status(200).json({ message: 'Nenhuma lista de preço encontrada para este produto' });
                 return;
             }
             
