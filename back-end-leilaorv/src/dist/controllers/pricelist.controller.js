@@ -78,7 +78,7 @@ class PriceListController {
                 const id = Number(req.params.id);
                 const priceList = yield this.priceListService.getPriceListById(id);
                 if (!priceList) {
-                    res.status(404).json({ message: 'Lista de preço não encontrada' });
+                    res.status(200).json({ message: 'Lista de preço não encontrada' });
                     return;
                 }
                 res.json(priceList);
@@ -119,7 +119,7 @@ class PriceListController {
                 const productId = Number(req.params.productId);
                 const priceLists = yield this.priceListService.findPriceListsByProduct(productId);
                 if (priceLists.length === 0) {
-                    res.status(404).json({ message: 'Nenhuma lista de preço encontrada para este produto' });
+                    res.status(200).json({ message: 'Nenhuma lista de preço encontrada para este produto' });
                     return;
                 }
                 res.json(priceLists);
